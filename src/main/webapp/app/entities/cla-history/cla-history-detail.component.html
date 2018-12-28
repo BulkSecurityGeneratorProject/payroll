@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cLAHistory">
+            <h2><span>CLA History</span> {{cLAHistory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{cLAHistory.date}}</span>
+                </dd>
+                <dt><span>City Category</span></dt>
+                <dd>
+                    <span>{{cLAHistory.cityCategory}}</span>
+                </dd>
+                <dt><span>Current Value</span></dt>
+                <dd>
+                    <span>{{cLAHistory.currentValue}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cla-history', cLAHistory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

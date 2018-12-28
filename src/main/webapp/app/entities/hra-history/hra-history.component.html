@@ -1,0 +1,66 @@
+<div>
+    <h2 id="page-heading">
+        <span>HRA Histories</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-hra-history" [routerLink]="['/hra-history/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new HRA History
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="hRAHistories">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="date"><span>Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cityCategory"><span>City Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="currentValue"><span>Current Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let hRAHistory of hRAHistories ;trackBy: trackId">
+                <td><a [routerLink]="['/hra-history', hRAHistory.id, 'view' ]">{{hRAHistory.id}}</a></td>
+                <td>{{hRAHistory.date | date:'mediumDate'}}</td>
+                <td>{{hRAHistory.cityCategory}}</td>
+                <td>{{hRAHistory.currentValue}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/hra-history', hRAHistory.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/hra-history', hRAHistory.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hra-history/'+ hRAHistory.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="hRAHistories && hRAHistories.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

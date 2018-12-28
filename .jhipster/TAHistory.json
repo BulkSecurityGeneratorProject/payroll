@@ -1,0 +1,27 @@
+{
+    "name": "TAHistory",
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "cityCategory",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "currentValue",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181226165120",
+    "entityTableName": "ta_history",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

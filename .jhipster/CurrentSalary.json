@@ -1,0 +1,41 @@
+{
+    "name": "CurrentSalary",
+    "fields": [
+        {
+            "fieldName": "basicPay",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "gradePay",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cityCategory",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "faculty",
+            "otherEntityName": "faculty",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "currentSalary"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "office",
+            "otherEntityName": "office",
+            "otherEntityField": "officeName"
+        }
+    ],
+    "changelogDate": "20181226165117",
+    "entityTableName": "current_salary",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

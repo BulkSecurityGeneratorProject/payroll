@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="tAHistory">
+            <h2><span>TA History</span> {{tAHistory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{tAHistory.date}}</span>
+                </dd>
+                <dt><span>City Category</span></dt>
+                <dd>
+                    <span>{{tAHistory.cityCategory}}</span>
+                </dd>
+                <dt><span>Current Value</span></dt>
+                <dd>
+                    <span>{{tAHistory.currentValue}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/ta-history', tAHistory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

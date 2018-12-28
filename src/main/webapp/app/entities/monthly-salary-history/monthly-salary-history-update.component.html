@@ -1,0 +1,146 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-monthly-salary-history-heading">Create or edit a Monthly Salary History</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!monthlySalaryHistory.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="monthlySalaryHistory.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_year">Year</label>
+                    <input type="number" class="form-control" name="year" id="field_year"
+                        [(ngModel)]="monthlySalaryHistory.year" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_month">Month</label>
+                    <input type="number" class="form-control" name="month" id="field_month"
+                        [(ngModel)]="monthlySalaryHistory.month" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_officeName">Office Name</label>
+                    <input type="text" class="form-control" name="officeName" id="field_officeName"
+                        [(ngModel)]="monthlySalaryHistory.officeName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_basicPay">Basic Pay</label>
+                    <input type="number" class="form-control" name="basicPay" id="field_basicPay"
+                        [(ngModel)]="monthlySalaryHistory.basicPay" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_gradePay">Grade Pay</label>
+                    <input type="number" class="form-control" name="gradePay" id="field_gradePay"
+                        [(ngModel)]="monthlySalaryHistory.gradePay" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_basicTotal">Basic Total</label>
+                    <input type="number" class="form-control" name="basicTotal" id="field_basicTotal"
+                        [(ngModel)]="monthlySalaryHistory.basicTotal" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_daPercent">Da Percent</label>
+                    <input type="number" class="form-control" name="daPercent" id="field_daPercent"
+                        [(ngModel)]="monthlySalaryHistory.daPercent" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_daValue">Da Value</label>
+                    <input type="number" class="form-control" name="daValue" id="field_daValue"
+                        [(ngModel)]="monthlySalaryHistory.daValue" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_totalSalary">Total Salary</label>
+                    <input type="number" class="form-control" name="totalSalary" id="field_totalSalary"
+                        [(ngModel)]="monthlySalaryHistory.totalSalary" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cityCategory">City Category</label>
+                    <input type="text" class="form-control" name="cityCategory" id="field_cityCategory"
+                        [(ngModel)]="monthlySalaryHistory.cityCategory" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_hraPercent">Hra Percent</label>
+                    <input type="number" class="form-control" name="hraPercent" id="field_hraPercent"
+                        [(ngModel)]="monthlySalaryHistory.hraPercent" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_hraValue">Hra Value</label>
+                    <input type="number" class="form-control" name="hraValue" id="field_hraValue"
+                        [(ngModel)]="monthlySalaryHistory.hraValue" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_travelAllowance">Travel Allowance</label>
+                    <input type="number" class="form-control" name="travelAllowance" id="field_travelAllowance"
+                        [(ngModel)]="monthlySalaryHistory.travelAllowance" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cla">Cla</label>
+                    <input type="number" class="form-control" name="cla" id="field_cla"
+                        [(ngModel)]="monthlySalaryHistory.cla" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_medical">Medical</label>
+                    <input type="number" class="form-control" name="medical" id="field_medical"
+                        [(ngModel)]="monthlySalaryHistory.medical" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_grossSalary">Gross Salary</label>
+                    <input type="number" class="form-control" name="grossSalary" id="field_grossSalary"
+                        [(ngModel)]="monthlySalaryHistory.grossSalary" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profTax">Prof Tax</label>
+                    <input type="number" class="form-control" name="profTax" id="field_profTax"
+                        [(ngModel)]="monthlySalaryHistory.profTax" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_insurance">Insurance</label>
+                    <input type="number" class="form-control" name="insurance" id="field_insurance"
+                        [(ngModel)]="monthlySalaryHistory.insurance" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_gpf">Gpf</label>
+                    <input type="number" class="form-control" name="gpf" id="field_gpf"
+                        [(ngModel)]="monthlySalaryHistory.gpf" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cpg">Cpg</label>
+                    <input type="number" class="form-control" name="cpg" id="field_cpg"
+                        [(ngModel)]="monthlySalaryHistory.cpg" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_incometax">Incometax</label>
+                    <input type="number" class="form-control" name="incometax" id="field_incometax"
+                        [(ngModel)]="monthlySalaryHistory.incometax" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_totalDeduction">Total Deduction</label>
+                    <input type="number" class="form-control" name="totalDeduction" id="field_totalDeduction"
+                        [(ngModel)]="monthlySalaryHistory.totalDeduction" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_netSalary">Net Salary</label>
+                    <input type="number" class="form-control" name="netSalary" id="field_netSalary"
+                        [(ngModel)]="monthlySalaryHistory.netSalary" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_faculty">Faculty</label>
+                    <select class="form-control" id="field_faculty" name="faculty" [(ngModel)]="monthlySalaryHistory.facultyId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="facultyOption.id" *ngFor="let facultyOption of faculties; trackBy: trackFacultyById">{{facultyOption.firstName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

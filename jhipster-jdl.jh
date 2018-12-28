@@ -1,0 +1,96 @@
+entity Faculty {
+    firstName String required,
+    lastName String,
+    designation String
+}
+
+entity MonthlySalaryHistory {
+    year Integer,
+    month Integer,
+    officeName String,
+    basicPay Long,
+    gradePay Long,
+    basicTotal Long,
+    daPercent Long,
+    daValue Long,
+    totalSalary Long,
+    cityCategory String,
+    hraPercent Long,
+    hraValue Long,
+    travelAllowance Long,
+    cla Long,
+    medical Long,    
+    grossSalary Long,
+    profTax Long,
+    insurance Long,
+    gpf Long,
+    cpg Long,
+    incometax Long,
+    totalDeduction Long,
+    netSalary Long
+}
+
+entity Office {
+	officeName String,
+    city String,
+    cityCategory String,
+    pincode Long,
+    taluka String,
+    district String
+}
+
+entity CurrentSalary {
+    basicPay Long,
+    gradePay Long,
+    cityCategory String
+}
+
+entity DAHistory {
+	date LocalDate,
+    increase Long,
+    currentValue Long      
+}
+
+entity HRAHistory {
+	date LocalDate,
+    cityCategory String,
+    currentValue Long
+}
+
+entity TAHistory {
+	date LocalDate,
+    cityCategory String,
+    currentValue Long
+}
+
+entity MedicalHistory {
+	date LocalDate,    
+    currentValue Long
+}
+
+entity CLAHistory {
+	date LocalDate,
+    cityCategory String,
+    currentValue Long
+}
+
+relationship OneToOne {
+	Faculty{user(login)} to User
+    Faculty to CurrentSalary
+}
+relationship OneToMany {
+	Faculty to MonthlySalaryHistory{faculty(firstName)},
+    Office to CurrentSalary{office(officeName)}
+}
+
+
+// Set pagination options
+//paginate FacultyMonthlySalaryHistory with infinite-scroll
+paginate * with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+
