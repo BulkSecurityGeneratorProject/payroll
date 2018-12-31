@@ -1,14 +1,13 @@
 package in.payroll.web.rest;
 
 import in.payroll.PayrollApp;
-
 import in.payroll.domain.CurrentSalary;
 import in.payroll.repository.CurrentSalaryRepository;
 import in.payroll.service.CurrentSalaryService;
+import in.payroll.service.MonthlySalaryHistoryService;
 import in.payroll.service.dto.CurrentSalaryDTO;
 import in.payroll.service.mapper.CurrentSalaryMapper;
 import in.payroll.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +25,6 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-
 
 import static in.payroll.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,6 +58,9 @@ public class CurrentSalaryResourceIntTest {
 
     @Autowired
     private CurrentSalaryService currentSalaryService;
+
+    @Autowired
+    private MonthlySalaryHistoryService monthlySalaryHistoryService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;

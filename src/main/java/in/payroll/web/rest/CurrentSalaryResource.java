@@ -1,14 +1,18 @@
 package in.payroll.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import in.payroll.service.CurrentSalaryService;
+import in.payroll.service.*;
+import in.payroll.service.dto.CurrentSalaryDTO;
+import in.payroll.service.dto.HRAHistoryDTO;
+import in.payroll.service.dto.MonthlySalaryHistoryDTO;
+import in.payroll.service.dto.TAHistoryDTO;
 import in.payroll.web.rest.errors.BadRequestAlertException;
 import in.payroll.web.rest.util.HeaderUtil;
 import in.payroll.web.rest.util.PaginationUtil;
-import in.payroll.service.dto.CurrentSalaryDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -18,10 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing CurrentSalary.
@@ -40,6 +42,25 @@ public class CurrentSalaryResource {
         this.currentSalaryService = currentSalaryService;
     }
 
+    @Autowired
+    private MonthlySalaryHistoryService monthlySalaryHistoryService;
+
+    @Autowired
+    private TAHistoryService tAHistoryService;
+
+    @Autowired
+    private CLAHistoryService claHistoryService;
+
+    @Autowired
+    private DAHistoryService daHistoryService;
+
+    @Autowired
+    private HRAHistoryService hraHistoryService;
+
+    @Autowired
+    private MedicalHistoryService medicalHistoryService;
+
+
     /**
      * POST  /current-salaries : Create a new currentSalary.
      *
@@ -55,10 +76,12 @@ public class CurrentSalaryResource {
             throw new BadRequestAlertException("A new currentSalary cannot already have an ID", ENTITY_NAME, "idexists");
         }
         CurrentSalaryDTO result = currentSalaryService.save(currentSalaryDTO);
+
         return ResponseEntity.created(new URI("/api/current-salaries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
 
     /**
      * PUT  /current-salaries : Updates an existing currentSalary.
@@ -114,8 +137,29 @@ public class CurrentSalaryResource {
     public ResponseEntity<CurrentSalaryDTO> getCurrentSalary(@PathVariable Long id) {
         log.debug("REST request to get CurrentSalary : {}", id);
         Optional<CurrentSalaryDTO> currentSalaryDTO = currentSalaryService.findOne(id);
+        MonthlySalaryHistoryDTO monthlySalaryHistoryDTO =  monthlySalary(currentSalaryDTO.get());
+        log.debug("?????????????????????????????????????????????????");
+        log.info(monthlySalaryHistoryDTO.toString());
         return ResponseUtil.wrapOrNotFound(currentSalaryDTO);
     }
+
+    private MonthlySalaryHistoryDTO monthlySalary(CurrentSalaryDTO currentSalaryDTO) {
+        MonthlySalaryHistoryDTO monthlySalaryHistoryDTO = new MonthlySalaryHistoryDTO();
+        monthlySalaryHistoryDTO.setBasicPay(currentSalaryDTO.getBasicPay());
+        monthlySalaryHistoryDTO.setGradePay(currentSalaryDTO.getGradePay());
+        monthlySalaryHistoryDTO.setBasicTotal(monthlySalaryHistoryDTO.getBasicPay() + monthlySalaryHistoryDTO.getGradePay());
+        //monthlySalaryHistoryDTO.setDaPercent();
+
+        TAHistoryDTO ta = tAHistoryService.findOneByCityCategory(currentSalaryDTO.getCityCategory());
+        HRAHistoryDTO hra = hraHistoryService.findOneByCityCategory(currentSalaryDTO.getCityCategory()).get();
+
+        monthlySalaryHistoryDTO.setTravelAllowance(ta.getCurrentValue());
+        monthlySalaryHistoryDTO.setHraPercent(hra.getCurrentValue());
+        monthlySalaryHistoryDTO.setHraValue( ( monthlySalaryHistoryDTO.getBasicTotal() * hra.getCurrentValue() ) / 100 );
+
+        return monthlySalaryHistoryDTO;
+    }
+
 
     /**
      * DELETE  /current-salaries/:id : delete the "id" currentSalary.

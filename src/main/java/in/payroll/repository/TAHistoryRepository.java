@@ -1,8 +1,10 @@
 package in.payroll.repository;
 
 import in.payroll.domain.TAHistory;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -12,4 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TAHistoryRepository extends JpaRepository<TAHistory, Long> {
 
+
+    List<TAHistory> findAllByCityCategoryOrderByDateDesc(String cityCategory);
 }

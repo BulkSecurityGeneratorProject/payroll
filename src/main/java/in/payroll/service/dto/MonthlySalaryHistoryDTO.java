@@ -320,4 +320,6 @@ public class MonthlySalaryHistoryDTO implements Serializable {
             ", faculty='" + getFacultyFirstName() + "'" +
             "}";
     }
+
+
 }

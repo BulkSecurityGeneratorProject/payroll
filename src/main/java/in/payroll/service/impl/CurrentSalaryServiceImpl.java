@@ -1,13 +1,12 @@
 package in.payroll.service.impl;
 
-import in.payroll.service.CurrentSalaryService;
 import in.payroll.domain.CurrentSalary;
 import in.payroll.repository.CurrentSalaryRepository;
+import in.payroll.service.CurrentSalaryService;
 import in.payroll.service.dto.CurrentSalaryDTO;
 import in.payroll.service.mapper.CurrentSalaryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -49,6 +48,12 @@ public class CurrentSalaryServiceImpl implements CurrentSalaryService {
 
         CurrentSalary currentSalary = currentSalaryMapper.toEntity(currentSalaryDTO);
         currentSalary = currentSalaryRepository.save(currentSalary);
+
+     // SAVE SALARY HISTORY
+
+
+
+
         return currentSalaryMapper.toDto(currentSalary);
     }
 

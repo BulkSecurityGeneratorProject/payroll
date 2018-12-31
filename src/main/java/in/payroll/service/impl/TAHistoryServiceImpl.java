@@ -1,18 +1,18 @@
 package in.payroll.service.impl;
 
-import in.payroll.service.TAHistoryService;
 import in.payroll.domain.TAHistory;
 import in.payroll.repository.TAHistoryRepository;
+import in.payroll.service.TAHistoryService;
 import in.payroll.service.dto.TAHistoryDTO;
 import in.payroll.service.mapper.TAHistoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -75,6 +75,20 @@ public class TAHistoryServiceImpl implements TAHistoryService {
         log.debug("Request to get TAHistory : {}", id);
         return tAHistoryRepository.findById(id)
             .map(tAHistoryMapper::toDto);
+    }
+
+    /**
+     * Get one tAHistory by id.
+     *
+     * @param cityCategory the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public TAHistoryDTO findOneByCityCategory(String cityCategory) {
+        log.debug("Request to get TAHistory : {}", cityCategory);
+        List<TAHistory> lst =  tAHistoryRepository.findAllByCityCategoryOrderByDateDesc(cityCategory);
+        return tAHistoryMapper.toDto(lst.get(0));
     }
 
     /**

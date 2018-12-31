@@ -1,7 +1,6 @@
 package in.payroll.service;
 
 import in.payroll.service.dto.TAHistoryDTO;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -36,6 +35,16 @@ public interface TAHistoryService {
      * @return the entity
      */
     Optional<TAHistoryDTO> findOne(Long id);
+
+
+    /**
+     * Get the "city category" tAHistory.
+     *
+     * @param cityCategory the cityCategory of the entity
+     * @return the entity
+     * List<TAHistoryDTO>
+     */
+    TAHistoryDTO findOneByCityCategory(String cityCategory);
 
     /**
      * Delete the "id" tAHistory.

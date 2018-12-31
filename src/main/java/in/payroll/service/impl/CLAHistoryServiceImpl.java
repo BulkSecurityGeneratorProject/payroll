@@ -1,13 +1,12 @@
 package in.payroll.service.impl;
 
-import in.payroll.service.CLAHistoryService;
 import in.payroll.domain.CLAHistory;
 import in.payroll.repository.CLAHistoryRepository;
+import in.payroll.service.CLAHistoryService;
 import in.payroll.service.dto.CLAHistoryDTO;
 import in.payroll.service.mapper.CLAHistoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -76,6 +75,8 @@ public class CLAHistoryServiceImpl implements CLAHistoryService {
         return cLAHistoryRepository.findById(id)
             .map(cLAHistoryMapper::toDto);
     }
+
+
 
     /**
      * Delete the cLAHistory by id.

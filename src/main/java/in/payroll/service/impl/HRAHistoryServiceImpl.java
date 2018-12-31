@@ -1,13 +1,12 @@
 package in.payroll.service.impl;
 
-import in.payroll.service.HRAHistoryService;
 import in.payroll.domain.HRAHistory;
 import in.payroll.repository.HRAHistoryRepository;
+import in.payroll.service.HRAHistoryService;
 import in.payroll.service.dto.HRAHistoryDTO;
 import in.payroll.service.mapper.HRAHistoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -76,6 +75,22 @@ public class HRAHistoryServiceImpl implements HRAHistoryService {
         return hRAHistoryRepository.findById(id)
             .map(hRAHistoryMapper::toDto);
     }
+
+
+    /**
+     * Get one hRAHistory by cityCategory.
+     *
+     * @param cityCategory the cityCategory of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<HRAHistoryDTO> findOneByCityCategory(String cityCategory) {
+        log.debug("Request to get HRAHistory : {}", cityCategory);
+        Optional<HRAHistory> hra =  hRAHistoryRepository.findOneByCityCategoryOrderByDateDesc(cityCategory);
+        return hra.map(hRAHistoryMapper::toDto);
+    }
+
 
     /**
      * Delete the hRAHistory by id.

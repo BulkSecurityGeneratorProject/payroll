@@ -1,7 +1,6 @@
 package in.payroll.service;
 
 import in.payroll.service.dto.HRAHistoryDTO;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -36,6 +35,14 @@ public interface HRAHistoryService {
      * @return the entity
      */
     Optional<HRAHistoryDTO> findOne(Long id);
+
+    /**
+     * Get the "cityCategory" hRAHistory.
+     *
+     * @param cityCategory the cityCategory of the entity
+     * @return the entity
+     */
+    Optional<HRAHistoryDTO> findOneByCityCategory(String cityCategory);
 
     /**
      * Delete the "id" hRAHistory.
