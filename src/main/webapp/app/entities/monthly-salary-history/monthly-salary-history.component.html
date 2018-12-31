@@ -1,0 +1,112 @@
+<div>
+    <h2 id="page-heading">
+        <span>Monthly Salary Histories</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-monthly-salary-history" [routerLink]="['/monthly-salary-history/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Monthly Salary History
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="monthlySalaryHistories">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year"><span>Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="month"><span>Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="officeName"><span>Office Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="basicPay"><span>Basic Pay</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gradePay"><span>Grade Pay</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="basicTotal"><span>Basic Total</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="daPercent"><span>Da Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="daValue"><span>Da Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalSalary"><span>Total Salary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cityCategory"><span>City Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hraPercent"><span>Hra Percent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hraValue"><span>Hra Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="travelAllowance"><span>Travel Allowance</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cla"><span>Cla</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="medical"><span>Medical</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="grossSalary"><span>Gross Salary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="profTax"><span>Prof Tax</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="insurance"><span>Insurance</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gpf"><span>Gpf</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cpg"><span>Cpg</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="incometax"><span>Incometax</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalDeduction"><span>Total Deduction</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="netSalary"><span>Net Salary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="facultyFirstName"><span>Faculty</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let monthlySalaryHistory of monthlySalaryHistories ;trackBy: trackId">
+                <td><a [routerLink]="['/monthly-salary-history', monthlySalaryHistory.id, 'view' ]">{{monthlySalaryHistory.id}}</a></td>
+                <td>{{monthlySalaryHistory.year}}</td>
+                <td>{{monthlySalaryHistory.month}}</td>
+                <td>{{monthlySalaryHistory.officeName}}</td>
+                <td>{{monthlySalaryHistory.basicPay}}</td>
+                <td>{{monthlySalaryHistory.gradePay}}</td>
+                <td>{{monthlySalaryHistory.basicTotal}}</td>
+                <td>{{monthlySalaryHistory.daPercent}}</td>
+                <td>{{monthlySalaryHistory.daValue}}</td>
+                <td>{{monthlySalaryHistory.totalSalary}}</td>
+                <td>{{monthlySalaryHistory.cityCategory}}</td>
+                <td>{{monthlySalaryHistory.hraPercent}}</td>
+                <td>{{monthlySalaryHistory.hraValue}}</td>
+                <td>{{monthlySalaryHistory.travelAllowance}}</td>
+                <td>{{monthlySalaryHistory.cla}}</td>
+                <td>{{monthlySalaryHistory.medical}}</td>
+                <td>{{monthlySalaryHistory.grossSalary}}</td>
+                <td>{{monthlySalaryHistory.profTax}}</td>
+                <td>{{monthlySalaryHistory.insurance}}</td>
+                <td>{{monthlySalaryHistory.gpf}}</td>
+                <td>{{monthlySalaryHistory.cpg}}</td>
+                <td>{{monthlySalaryHistory.incometax}}</td>
+                <td>{{monthlySalaryHistory.totalDeduction}}</td>
+                <td>{{monthlySalaryHistory.netSalary}}</td>
+                <td>
+                    <div *ngIf="monthlySalaryHistory.facultyId">
+                        <a [routerLink]="['../faculty', monthlySalaryHistory.facultyId , 'view' ]" >{{monthlySalaryHistory.facultyFirstName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/monthly-salary-history', monthlySalaryHistory.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/monthly-salary-history', monthlySalaryHistory.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'monthly-salary-history/'+ monthlySalaryHistory.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="monthlySalaryHistories && monthlySalaryHistories.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

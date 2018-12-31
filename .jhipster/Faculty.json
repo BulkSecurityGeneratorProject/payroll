@@ -1,0 +1,53 @@
+{
+    "name": "Faculty",
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "designation",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "faculty"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "currentSalary",
+            "otherEntityName": "currentSalary",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "faculty"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "monthlySalaryHistory",
+            "otherEntityName": "monthlySalaryHistory",
+            "otherEntityRelationshipName": "faculty"
+        }
+    ],
+    "changelogDate": "20181226165114",
+    "entityTableName": "faculty",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

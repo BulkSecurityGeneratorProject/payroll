@@ -1,0 +1,46 @@
+{
+    "name": "Office",
+    "fields": [
+        {
+            "fieldName": "officeName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cityCategory",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pincode",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "taluka",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "district",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "currentSalary",
+            "otherEntityName": "currentSalary",
+            "otherEntityRelationshipName": "office"
+        }
+    ],
+    "changelogDate": "20181226165116",
+    "entityTableName": "office",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

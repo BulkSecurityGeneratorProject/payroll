@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="currentSalary">
+            <h2><span>Current Salary</span> {{currentSalary.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Basic Pay</span></dt>
+                <dd>
+                    <span>{{currentSalary.basicPay}}</span>
+                </dd>
+                <dt><span>Grade Pay</span></dt>
+                <dd>
+                    <span>{{currentSalary.gradePay}}</span>
+                </dd>
+                <dt><span>City Category</span></dt>
+                <dd>
+                    <span>{{currentSalary.cityCategory}}</span>
+                </dd>
+                <dt><span>Office</span></dt>
+                <dd>
+                    <div *ngIf="currentSalary.officeId">
+                        <a [routerLink]="['/office', currentSalary.officeId, 'view']">{{currentSalary.officeOfficeName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/current-salary', currentSalary.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

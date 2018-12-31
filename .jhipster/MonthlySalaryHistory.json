@@ -1,0 +1,114 @@
+{
+    "name": "MonthlySalaryHistory",
+    "fields": [
+        {
+            "fieldName": "year",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "month",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "officeName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "basicPay",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "gradePay",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "basicTotal",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "daPercent",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "daValue",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "totalSalary",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cityCategory",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hraPercent",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "hraValue",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "travelAllowance",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cla",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "medical",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "grossSalary",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "profTax",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "insurance",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "gpf",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cpg",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "incometax",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "totalDeduction",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "netSalary",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "faculty",
+            "otherEntityName": "faculty",
+            "otherEntityField": "firstName"
+        }
+    ],
+    "changelogDate": "20181226165115",
+    "entityTableName": "monthly_salary_history",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
