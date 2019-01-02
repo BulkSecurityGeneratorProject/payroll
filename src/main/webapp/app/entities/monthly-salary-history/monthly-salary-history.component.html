@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span>Monthly Salary Histories</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-monthly-salary-history" [routerLink]="['/monthly-salary-history/new']">
+        <button hidden id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-monthly-salary-history" [routerLink]="['/monthly-salary-history/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
             Create new Monthly Salary History
@@ -14,7 +14,7 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th hidden jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="year"><span>Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="month"><span>Month</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="officeName"><span>Office Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -44,7 +44,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let monthlySalaryHistory of monthlySalaryHistories ;trackBy: trackId">
-                <td><a [routerLink]="['/monthly-salary-history', monthlySalaryHistory.id, 'view' ]">{{monthlySalaryHistory.id}}</a></td>
+                <td hidden ><a [routerLink]="['/monthly-salary-history', monthlySalaryHistory.id, 'view' ]">{{monthlySalaryHistory.id}}</a></td>
                 <td>{{monthlySalaryHistory.year}}</td>
                 <td>{{monthlySalaryHistory.month}}</td>
                 <td>{{monthlySalaryHistory.officeName}}</td>
@@ -87,7 +87,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button hidden type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'monthly-salary-history/'+ monthlySalaryHistory.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

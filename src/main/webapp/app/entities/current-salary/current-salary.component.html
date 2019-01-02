@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span>Current Salaries</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-current-salary" [routerLink]="['/current-salary/new']">
+        <button hidden id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-current-salary" [routerLink]="['/current-salary/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
             Create new Current Salary
@@ -14,7 +14,7 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th hidden jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="basicPay"><span>Basic Pay</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="gradePay"><span>Grade Pay</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="cityCategory"><span>City Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let currentSalary of currentSalaries ;trackBy: trackId">
-                <td><a [routerLink]="['/current-salary', currentSalary.id, 'view' ]">{{currentSalary.id}}</a></td>
+                <td hidden ><a [routerLink]="['/current-salary', currentSalary.id, 'view' ]">{{currentSalary.id}}</a></td>
                 <td>{{currentSalary.basicPay}}</td>
                 <td>{{currentSalary.gradePay}}</td>
                 <td>{{currentSalary.cityCategory}}</td>
@@ -47,7 +47,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button hidden type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'current-salary/'+ currentSalary.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
