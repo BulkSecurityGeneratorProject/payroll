@@ -76,6 +76,18 @@ public class CLAHistoryServiceImpl implements CLAHistoryService {
             .map(cLAHistoryMapper::toDto);
     }
 
+    /**
+     * Get the "cityCategory" cLAHistory.
+     *
+     * @param cityCategory the cityCategory of the entity
+     * @return the entity
+     */
+    @Override
+    public Optional<CLAHistoryDTO> findOneByCityCategory(String cityCategory) {
+        log.debug("Request to get CLAHistory : {}", cityCategory);
+        return cLAHistoryRepository.findOneByCityCategoryOrderByDateDesc(cityCategory)
+            .map(cLAHistoryMapper::toDto);
+    }
 
 
     /**

@@ -38,6 +38,14 @@ public interface MonthlySalaryHistoryService {
     Optional<MonthlySalaryHistoryDTO> findOne(Long id);
 
     /**
+     * Get the "year,month" monthlySalaryHistory.
+     *
+     * @param year,month the month of the entity
+     * @return the entity
+     */
+    Optional<MonthlySalaryHistoryDTO> findOneByYearAndByMonth(Integer year,Integer month);
+
+    /**
      * Delete the "id" monthlySalaryHistory.
      *
      * @param id the id of the entity

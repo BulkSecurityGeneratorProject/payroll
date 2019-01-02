@@ -42,9 +42,9 @@ public interface TAHistoryService {
      *
      * @param cityCategory the cityCategory of the entity
      * @return the entity
-     * List<TAHistoryDTO>
+     * Optional<TAHistoryDTO>
      */
-    TAHistoryDTO findOneByCityCategory(String cityCategory);
+    Optional<TAHistoryDTO> findOneByCityCategory(String cityCategory);
 
     /**
      * Delete the "id" tAHistory.

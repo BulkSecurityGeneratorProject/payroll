@@ -38,6 +38,14 @@ public interface CLAHistoryService {
     Optional<CLAHistoryDTO> findOne(Long id);
 
     /**
+     * Get the "cityCategory" cLAHistory.
+     *
+     * @param cityCategory the cityCategory of the entity
+     * @return the entity
+     */
+    Optional<CLAHistoryDTO> findOneByCityCategory(String cityCategory);
+
+    /**
      * Delete the "id" cLAHistory.
      *
      * @param id the id of the entity

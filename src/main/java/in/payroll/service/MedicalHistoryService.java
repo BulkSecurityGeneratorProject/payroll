@@ -38,6 +38,14 @@ public interface MedicalHistoryService {
     Optional<MedicalHistoryDTO> findOne(Long id);
 
     /**
+     * Get the medicalHistory.
+     *
+     * @param
+     * @return the entity
+     */
+    Optional<MedicalHistoryDTO> findOneByDate();
+
+    /**
      * Delete the "id" medicalHistory.
      *
      * @param id the id of the entity

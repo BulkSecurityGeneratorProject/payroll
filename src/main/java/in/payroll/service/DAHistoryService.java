@@ -38,6 +38,14 @@ public interface DAHistoryService {
     Optional<DAHistoryDTO> findOne(Long id);
 
     /**
+     * Get the "" dAHistory.
+     *
+     * @param  the  of the entity
+     * @return the entity
+     */
+    Optional<DAHistoryDTO> findOneByDate();
+
+    /**
      * Delete the "id" dAHistory.
      *
      * @param id the id of the entity

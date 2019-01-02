@@ -85,10 +85,10 @@ public class TAHistoryServiceImpl implements TAHistoryService {
      */
     @Override
     @Transactional(readOnly = true)
-    public TAHistoryDTO findOneByCityCategory(String cityCategory) {
+    public Optional<TAHistoryDTO> findOneByCityCategory(String cityCategory) {
         log.debug("Request to get TAHistory : {}", cityCategory);
-        List<TAHistory> lst =  tAHistoryRepository.findAllByCityCategoryOrderByDateDesc(cityCategory);
-        return tAHistoryMapper.toDto(lst.get(0));
+        return tAHistoryRepository.findOneByCityCategoryOrderByDateDesc(cityCategory).map(tAHistoryMapper::toDto);
+
     }
 
     /**

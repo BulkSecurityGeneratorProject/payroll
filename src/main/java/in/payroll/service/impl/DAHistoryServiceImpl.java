@@ -78,6 +78,19 @@ public class DAHistoryServiceImpl implements DAHistoryService {
     }
 
     /**
+     * Get the "" dAHistory.
+     *
+     * @param  the  of the entity
+     * @return the entity
+     */
+    @Override
+    public Optional<DAHistoryDTO> findOneByDate() {
+        log.debug("Request to get DAHistory : {}");
+        return dAHistoryRepository.findTopByOrderByDateDesc()
+            .map(dAHistoryMapper::toDto);
+    }
+
+    /**
      * Delete the dAHistory by id.
      *
      * @param id the id of the entity

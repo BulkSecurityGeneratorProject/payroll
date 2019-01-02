@@ -78,6 +78,18 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
     }
 
     /**
+     * Get the medicalHistory.
+     *
+     * @return the entity
+     */
+    @Override
+    public Optional<MedicalHistoryDTO> findOneByDate() {
+        log.debug("Request to get MedicalHistory : {}");
+        return medicalHistoryRepository.findTopByOrderByDateDesc()
+            .map(medicalHistoryMapper::toDto);
+    }
+
+    /**
      * Delete the medicalHistory by id.
      *
      * @param id the id of the entity

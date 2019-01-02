@@ -2,10 +2,7 @@ package in.payroll.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import in.payroll.service.*;
-import in.payroll.service.dto.CurrentSalaryDTO;
-import in.payroll.service.dto.HRAHistoryDTO;
-import in.payroll.service.dto.MonthlySalaryHistoryDTO;
-import in.payroll.service.dto.TAHistoryDTO;
+import in.payroll.service.dto.*;
 import in.payroll.web.rest.errors.BadRequestAlertException;
 import in.payroll.web.rest.util.HeaderUtil;
 import in.payroll.web.rest.util.PaginationUtil;
@@ -22,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -138,24 +137,63 @@ public class CurrentSalaryResource {
         log.debug("REST request to get CurrentSalary : {}", id);
         Optional<CurrentSalaryDTO> currentSalaryDTO = currentSalaryService.findOne(id);
         MonthlySalaryHistoryDTO monthlySalaryHistoryDTO =  monthlySalary(currentSalaryDTO.get());
+
         log.debug("?????????????????????????????????????????????????");
         log.info(monthlySalaryHistoryDTO.toString());
+        monthlySalaryHistoryService.save(monthlySalaryHistoryDTO);
+
         return ResponseUtil.wrapOrNotFound(currentSalaryDTO);
     }
 
     private MonthlySalaryHistoryDTO monthlySalary(CurrentSalaryDTO currentSalaryDTO) {
-        MonthlySalaryHistoryDTO monthlySalaryHistoryDTO = new MonthlySalaryHistoryDTO();
+        LocalDate ld = LocalDate.now();
+        Optional<MonthlySalaryHistoryDTO> monthlySalary =
+            monthlySalaryHistoryService.findOneByYearAndByMonth(ld.getYear(),ld.getMonthValue());
+
+        MonthlySalaryHistoryDTO monthlySalaryHistoryDTO;
+        if(monthlySalary.isPresent())
+            monthlySalaryHistoryDTO = monthlySalary.get();
+        else
+            monthlySalaryHistoryDTO = new MonthlySalaryHistoryDTO();
+
+        TAHistoryDTO ta = tAHistoryService.findOneByCityCategory(currentSalaryDTO.getCityCategory()).get();
+        HRAHistoryDTO hra = hraHistoryService.findOneByCityCategory(currentSalaryDTO.getCityCategory()).get();
+        CLAHistoryDTO cla = claHistoryService.findOneByCityCategory(currentSalaryDTO.getCityCategory()).get();
+        DAHistoryDTO da = daHistoryService.findOneByDate().get();
+        MedicalHistoryDTO medical = medicalHistoryService.findOneByDate().get();
+
+        monthlySalaryHistoryDTO.setYear(ld.getYear());
+        monthlySalaryHistoryDTO.setMonth(ld.getMonthValue());
         monthlySalaryHistoryDTO.setBasicPay(currentSalaryDTO.getBasicPay());
         monthlySalaryHistoryDTO.setGradePay(currentSalaryDTO.getGradePay());
         monthlySalaryHistoryDTO.setBasicTotal(monthlySalaryHistoryDTO.getBasicPay() + monthlySalaryHistoryDTO.getGradePay());
-        //monthlySalaryHistoryDTO.setDaPercent();
-
-        TAHistoryDTO ta = tAHistoryService.findOneByCityCategory(currentSalaryDTO.getCityCategory());
-        HRAHistoryDTO hra = hraHistoryService.findOneByCityCategory(currentSalaryDTO.getCityCategory()).get();
-
-        monthlySalaryHistoryDTO.setTravelAllowance(ta.getCurrentValue());
+        monthlySalaryHistoryDTO.setOfficeName(currentSalaryDTO.getOfficeOfficeName());
+        monthlySalaryHistoryDTO.setDaPercent(da.getCurrentValue());
+        monthlySalaryHistoryDTO.setDaValue(( monthlySalaryHistoryDTO.getBasicTotal() * da.getCurrentValue() ) / 100);
+        monthlySalaryHistoryDTO.setTotalSalary(monthlySalaryHistoryDTO.getBasicTotal() + monthlySalaryHistoryDTO.getDaValue());
+        monthlySalaryHistoryDTO.setCityCategory(currentSalaryDTO.getCityCategory());
         monthlySalaryHistoryDTO.setHraPercent(hra.getCurrentValue());
-        monthlySalaryHistoryDTO.setHraValue( ( monthlySalaryHistoryDTO.getBasicTotal() * hra.getCurrentValue() ) / 100 );
+        monthlySalaryHistoryDTO.setHraValue(( monthlySalaryHistoryDTO.getBasicTotal() * hra.getCurrentValue() ) / 100);
+        monthlySalaryHistoryDTO.setTravelAllowance(ta.getCurrentValue());
+        monthlySalaryHistoryDTO.setCla(cla.getCurrentValue());
+        monthlySalaryHistoryDTO.setMedical(medical.getCurrentValue());
+        monthlySalaryHistoryDTO.setGrossSalary(monthlySalaryHistoryDTO.getTotalSalary()
+            + monthlySalaryHistoryDTO.getHraValue()
+            + monthlySalaryHistoryDTO.getTravelAllowance()
+            + monthlySalaryHistoryDTO.getCla()
+            + monthlySalaryHistoryDTO.getMedical() );
+        monthlySalaryHistoryDTO.setGpf(0L);
+        monthlySalaryHistoryDTO.setCpg(( monthlySalaryHistoryDTO.getTotalSalary() * 10 ) / 100 ) ;
+        monthlySalaryHistoryDTO.setProfTax(200L);
+        monthlySalaryHistoryDTO.setInsurance(300L);
+        monthlySalaryHistoryDTO.setIncometax(1000L);
+        monthlySalaryHistoryDTO.setTotalDeduction( monthlySalaryHistoryDTO.getCpg()
+            + monthlySalaryHistoryDTO.getGpf()
+            + monthlySalaryHistoryDTO.getProfTax()
+            + monthlySalaryHistoryDTO.getInsurance()
+            + monthlySalaryHistoryDTO.getIncometax());
+        monthlySalaryHistoryDTO.setNetSalary(monthlySalaryHistoryDTO.getGrossSalary() - monthlySalaryHistoryDTO.getTotalDeduction());
+
 
         return monthlySalaryHistoryDTO;
     }

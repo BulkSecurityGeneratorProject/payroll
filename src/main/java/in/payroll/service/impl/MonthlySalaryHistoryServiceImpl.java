@@ -78,6 +78,22 @@ public class MonthlySalaryHistoryServiceImpl implements MonthlySalaryHistoryServ
     }
 
     /**
+     * Get one monthlySalaryHistory by year,month.
+     *
+     * @param year,month the year,month of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<MonthlySalaryHistoryDTO> findOneByYearAndByMonth(Integer year,Integer month) {
+        log.debug("Request to get MonthlySalaryHistory : {}", year);
+        return monthlySalaryHistoryRepository.findOneByYearAndMonth(year,month)
+            .map(monthlySalaryHistoryMapper::toDto);
+    }
+
+
+
+    /**
      * Delete the monthlySalaryHistory by id.
      *
      * @param id the id of the entity
