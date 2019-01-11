@@ -40,6 +40,8 @@
                 "version": "2.1.0"
             }
         ],
-        "enableTranslation": false
+        "enableTranslation": false,
+        "herokuAppName": "govt-payroll",
+        "herokuDeployType": "git"
     }
 }
