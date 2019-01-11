@@ -1,13 +1,14 @@
 package in.payroll.service.impl;
 
-import in.payroll.service.MonthlySalaryHistoryService;
 import in.payroll.domain.MonthlySalaryHistory;
 import in.payroll.repository.MonthlySalaryHistoryRepository;
+import in.payroll.service.MonthlySalaryHistoryService;
+import in.payroll.service.SalaryCalculationService;
 import in.payroll.service.dto.MonthlySalaryHistoryDTO;
 import in.payroll.service.mapper.MonthlySalaryHistoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class MonthlySalaryHistoryServiceImpl implements MonthlySalaryHistoryServ
 
     private final MonthlySalaryHistoryMapper monthlySalaryHistoryMapper;
 
+    @Autowired
+    private SalaryCalculationService calculationService;
+
     public MonthlySalaryHistoryServiceImpl(MonthlySalaryHistoryRepository monthlySalaryHistoryRepository, MonthlySalaryHistoryMapper monthlySalaryHistoryMapper) {
         this.monthlySalaryHistoryRepository = monthlySalaryHistoryRepository;
         this.monthlySalaryHistoryMapper = monthlySalaryHistoryMapper;
@@ -42,9 +46,9 @@ public class MonthlySalaryHistoryServiceImpl implements MonthlySalaryHistoryServ
     @Override
     public MonthlySalaryHistoryDTO save(MonthlySalaryHistoryDTO monthlySalaryHistoryDTO) {
         log.debug("Request to save MonthlySalaryHistory : {}", monthlySalaryHistoryDTO);
-
         MonthlySalaryHistory monthlySalaryHistory = monthlySalaryHistoryMapper.toEntity(monthlySalaryHistoryDTO);
         monthlySalaryHistory = monthlySalaryHistoryRepository.save(monthlySalaryHistory);
+        calculationService.updateMonthlySalary(monthlySalaryHistoryDTO);
         return monthlySalaryHistoryMapper.toDto(monthlySalaryHistory);
     }
 

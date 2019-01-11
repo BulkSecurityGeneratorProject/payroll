@@ -3,10 +3,12 @@ package in.payroll.service.impl;
 import in.payroll.domain.CurrentSalary;
 import in.payroll.repository.CurrentSalaryRepository;
 import in.payroll.service.CurrentSalaryService;
+import in.payroll.service.SalaryCalculationService;
 import in.payroll.service.dto.CurrentSalaryDTO;
 import in.payroll.service.mapper.CurrentSalaryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,10 @@ public class CurrentSalaryServiceImpl implements CurrentSalaryService {
         this.currentSalaryMapper = currentSalaryMapper;
     }
 
+    @Autowired
+    private SalaryCalculationService calculationService;
+
+
     /**
      * Save a currentSalary.
      *
@@ -49,10 +55,7 @@ public class CurrentSalaryServiceImpl implements CurrentSalaryService {
         CurrentSalary currentSalary = currentSalaryMapper.toEntity(currentSalaryDTO);
         currentSalary = currentSalaryRepository.save(currentSalary);
 
-     // SAVE SALARY HISTORY
-
-
-
+        calculationService.updateMonthlySalary(currentSalaryDTO);
 
         return currentSalaryMapper.toDto(currentSalary);
     }
