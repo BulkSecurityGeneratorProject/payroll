@@ -1,6 +1,12 @@
 <div class="row">
     <div class="col-md-9">
-        <p class="lead">This is your homepage</p>
+        <p class="lead">Please Login to use Salary Calculation Functionality. </p>
+        <p>Follow below steps</p>
+        <ul>
+            <li>All parameters like DA, HRA, City Category must be filled by administrator before calculating salary (One time by admin) </li>
+            <li>User has to populate Faculty , Current Salary details </li>
+            <li>Open Monthly salary tab which calculates monthly salary based on parameters set by admin and you current salary inputs</li>
+        </ul>
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account"
